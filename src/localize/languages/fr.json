@@ -1,6 +1,8 @@
 {
   "weather": {
     "clear-night": "Dégagé",
+    "clear-sky": "Dégagé",
+    "ciel-clair": "Dégagé2",
     "cloudy": "Nuageux",
     "fog": "Brouillard",
     "hail": "Grêle",
