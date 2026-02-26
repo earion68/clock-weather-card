@@ -1,5 +1,4 @@
 name: Release
-
 on:
   release:
     types: [published]
@@ -10,30 +9,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4  # v4 !
 
-      - name: Make slug values available
-        uses: gacts/github-slug@v1
-        id: slug
+      - name: Setup Node/Yarn
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'yarn'
 
-      - name: Build the file
+      - name: Build
         run: |
-          cd /home/runner/work/clock-weather-card/clock-weather-card
-          yarn install
-          yarn version --no-git-tag-version --new-version ${{ steps.slug.outputs.version }}
-          yarn build
+          yarn install --frozen-lockfile
+          yarn build  # Pas yarn version : utilise tag GitHub direct
 
-      - name: Upload zip to release
-        uses: svenstaro/upload-release-action@v1-release
-
+      - name: Upload JS to release
+        uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /home/runner/work/clock-weather-card/clock-weather-card/dist/clock-weather-card.js
+          file: dist/clock-weather-card.js  # Relatif !
           asset_name: clock-weather-card.js
           tag: ${{ github.ref }}
           overwrite: true
-
-#      - name: Verify HACS compliance
+#      - name: HACS validation
 #        uses: hacs/action@main
 #        with:
-#          category: plugin
+#          category: 'plugin'
