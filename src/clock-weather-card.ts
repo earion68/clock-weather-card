@@ -453,7 +453,7 @@ export class ClockWeatherCard extends LitElement {
     const zonedDate = this.toZonedDate(this.currentDate);
     const weekday = this.localize(`day.${zonedDate.getDay()}`);
     const date = format(zonedDate, this.config.date_pattern, { locale: this.getDateFnsLocale() });
-    return`${weekday}, ${date}`
+    return`${weekday} ${date}`
   }
 
   private time(date: Date = this.currentDate): string {
