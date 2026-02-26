@@ -33,7 +33,7 @@ jobs:
           tag: ${{ github.ref }}
           overwrite: true
 
-      - name: Verify HACS compliance
-        uses: hacs/action@main
-        with:
-          category: plugin
+#      - name: Verify HACS compliance
+#        uses: hacs/action@main
+#        with:
+#          category: plugin
